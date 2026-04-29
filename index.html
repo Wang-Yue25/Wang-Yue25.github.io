@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yue Wang — Tsinghua University</title>
+<style>
+  :root {
+    --bg: #06060d;
+    --surface: rgba(255,255,255,0.03);
+    --glass: rgba(255,255,255,0.04);
+    --border: rgba(255,255,255,0.06);
+    --text: #c8c8d4;
+    --text-dim: #787890;
+    --accent: #00d4ff;
+    --accent2: #7c3aed;
+    --glow: rgba(0,212,255,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    cursor: crosshair;
+  }
+
+  /* ── canvas background ── */
+  #particles {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* ── mouse glow ── */
+  .mouse-glow {
+    position: fixed;
+    pointer-events: none;
+    z-index: 1;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--glow) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    transition: opacity 0.4s;
+  }
+
+  /* ── main content ── */
+  .container {
+    position: relative;
+    z-index: 2;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 80px 24px 120px;
+  }
+
+  /* ── glass card ── */
+  .card {
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.15s ease-out, border-color 0.4s, box-shadow 0.4s;
+    transform: perspective(800px) rotateX(0deg) rotateY(0deg);
+    transform-style: preserve-3d;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(600px circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,0.04), transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .card > * { position: relative; z-index: 1; }
+  .card:hover {
+    border-color: rgba(255,255,255,0.12);
+    box-shadow: 0 0 40px rgba(0,212,255,0.06), 0 8px 32px rgba(0,0,0,0.4);
+  }
+
+  /* ── header ── */
+  .header {
+    text-align: center;
+    margin-bottom: 36px;
+  }
+  .name {
+    font-size: 3rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    background: linear-gradient(135deg, #e8e8f0 0%, #00d4ff 50%, #7c3aed 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 3s ease-in-out infinite;
+    background-size: 200% 200%;
+  }
+  @keyframes shimmer {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  .subtitle {
+    font-size: 1.05rem;
+    color: var(--text-dim);
+    margin-top: 8px;
+    letter-spacing: 0.04em;
+  }
+  .subtitle .cursor {
+    display: inline-block;
+    width: 2px; height: 1.1em;
+    background: var(--accent);
+    margin-left: 2px;
+    vertical-align: text-bottom;
+    animation: blink 1s step-end infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  .affiliation {
+    margin-top: 16px;
+    font-size: 0.95rem;
+    color: var(--text-dim);
+  }
+  .email {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 8px 20px;
+    border-radius: 100px;
+    font-size: 0.9rem;
+    color: var(--accent);
+    background: rgba(0,212,255,0.06);
+    border: 1px solid rgba(0,212,255,0.15);
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  .email:hover {
+    background: rgba(0,212,255,0.12);
+    border-color: rgba(0,212,255,0.3);
+    box-shadow: 0 0 20px rgba(0,212,255,0.15);
+  }
+
+  /* ── section titles ── */
+  h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #e0e0ec;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    letter-spacing: -0.01em;
+  }
+  h2::before {
+    content: '';
+    display: block;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent);
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+  @keyframes pulse-dot {
+    0%, 100% { box-shadow: 0 0 6px var(--accent), 0 0 12px var(--accent); }
+    50% { box-shadow: 0 0 14px var(--accent), 0 0 28px var(--accent); }
+  }
+
+  /* ── bio ── */
+  .bio p {
+    line-height: 1.75;
+    color: #b0b0c0;
+    font-size: 0.95rem;
+  }
+
+  /* ── research tags ── */
+  .tag-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+  .tag-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px 20px;
+    border-radius: 14px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.04);
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .tag-list li::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(400px circle at var(--mx, 50%) var(--my, 50%), rgba(0,212,255,0.04), transparent 70%);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .tag-list li:hover {
+    border-color: rgba(255,255,255,0.1);
+    transform: translateX(4px);
+  }
+  .tag-list li:hover::after { opacity: 1; }
+  .tag-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    width: 40px; height: 40px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 10px;
+    background: rgba(0,212,255,0.08);
+  }
+  .tag-list strong {
+    display: block;
+    color: #d8d8e8;
+    font-size: 0.95rem;
+    margin-bottom: 2px;
+  }
+  .tag-list span {
+    color: var(--text-dim);
+    font-size: 0.85rem;
+  }
+
+  /* ── education ── */
+  .edu-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    border-radius: 14px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.04);
+    transition: all 0.3s;
+  }
+  .edu-item:hover {
+    border-color: rgba(255,255,255,0.1);
+    transform: translateX(4px);
+  }
+  .edu-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 12px var(--accent);
+    flex-shrink: 0;
+  }
+  .edu-text strong { color: #d8d8e8; font-size: 0.95rem; }
+  .edu-text span { color: var(--text-dim); font-size: 0.85rem; display: block; }
+
+  /* ── footer ── */
+  .footer {
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 0.8rem;
+    margin-top: 40px;
+    opacity: 0.6;
+  }
+
+  /* ── entrance animation ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: reveal 0.8s ease-out forwards;
+  }
+  .reveal:nth-child(1) { animation-delay: 0.1s; }
+  .reveal:nth-child(2) { animation-delay: 0.2s; }
+  .reveal:nth-child(3) { animation-delay: 0.3s; }
+  .reveal:nth-child(4) { animation-delay: 0.4s; }
+  @keyframes reveal {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 600px) {
+    .container { padding: 40px 16px 80px; }
+    .card { padding: 24px; }
+    .name { font-size: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="mouse-glow" id="glow"></div>
+<canvas id="particles"></canvas>
+
+<main class="container">
+  <div class="header reveal">
+    <h1 class="name">Yue Wang</h1>
+    <p class="subtitle" id="typing"></p>
+    <p class="affiliation">School of Integrated Circuits, Tsinghua University</p>
+    <a class="email" href="mailto:yue-wang25@mails.tsinghua.edu.cn">yue-wang25@mails.tsinghua.edu.cn</a>
+  </div>
+
+  <div class="card reveal">
+    <h2>About Me</h2>
+    <div class="bio">
+      <p>I am a master's student at the School of Integrated Circuits, Tsinghua University. My research interests lie in world models, AI agents, and reinforcement learning. I am passionate about building intelligent systems that can perceive, reason, and act in complex environments, with the goal of advancing toward more general and capable AI.</p>
+    </div>
+  </div>
+
+  <div class="card reveal">
+    <h2>Research Interests</h2>
+    <ul class="tag-list">
+      <li>
+        <div class="tag-icon">🌐</div>
+        <div><strong>World Models</strong><span>Learning compact and predictive representations of environments</span></div>
+      </li>
+      <li>
+        <div class="tag-icon">🤖</div>
+        <div><strong>AI Agents</strong><span>Building autonomous agents that plan, reason, and interact with the world</span></div>
+      </li>
+      <li>
+        <div class="tag-icon">🧠</div>
+        <div><strong>Reinforcement Learning</strong><span>Developing sample-efficient and generalizable RL algorithms</span></div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card reveal">
+    <h2>Education</h2>
+    <div class="edu-item">
+      <div class="edu-dot"></div>
+      <div class="edu-text">
+        <strong>M.S. in Integrated Circuits</strong>
+        <span>Tsinghua University</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer reveal">Yue Wang &copy; 2025</div>
+</main>
+
+<script>
+// ── mouse glow follow ──
+const glow = document.getElementById('glow');
+let mx = window.innerWidth / 2, my = window.innerHeight / 2;
+let tx = mx, ty = my;
+
+document.addEventListener('mousemove', e => { tx = e.clientX; ty = e.clientY; });
+document.addEventListener('mouseleave', () => { glow.style.opacity = '0'; });
+document.addEventListener('mouseenter', () => { glow.style.opacity = '1'; });
+
+function animateGlow() {
+  mx += (tx - mx) * 0.08;
+  my += (ty - my) * 0.08;
+  glow.style.left = mx + 'px';
+  glow.style.top = my + 'px';
+  requestAnimationFrame(animateGlow);
+}
+animateGlow();
+
+// ── card tilt toward mouse ──
+document.querySelectorAll('.card, .tag-list li, .edu-item').forEach(el => {
+  el.addEventListener('mousemove', e => {
+    const rect = el.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    el.style.setProperty('--mx', x + '%');
+    el.style.setProperty('--my', y + '%');
+
+    if (el.classList.contains('card')) {
+      const rx = ((e.clientY - rect.top) / rect.height - 0.5) * 6;
+      const ry = ((e.clientX - rect.left) / rect.width - 0.5) * -6;
+      el.style.transform = `perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+    }
+  });
+  el.addEventListener('mouseleave', () => {
+    el.style.setProperty('--mx', '50%');
+    el.style.setProperty('--my', '50%');
+    if (el.classList.contains('card')) {
+      el.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg)';
+    }
+  });
+});
+
+// ── typing animation ──
+const phrases = ['Master\'s Student', 'AI Researcher', 'World Models Explorer'];
+let phraseIdx = 0, charIdx = 0, deleting = false;
+const typingEl = document.getElementById('typing');
+
+function type() {
+  const current = phrases[phraseIdx];
+  if (deleting) {
+    typingEl.innerHTML = current.substring(0, charIdx--) + '<span class="cursor"></span>';
+  } else {
+    typingEl.innerHTML = current.substring(0, charIdx++) + '<span class="cursor"></span>';
+  }
+
+  let delay = deleting ? 40 : 80;
+  if (!deleting && charIdx > current.length) { delay = 2000; deleting = true; }
+  if (deleting && charIdx < 0) {
+    deleting = false;
+    phraseIdx = (phraseIdx + 1) % phrases.length;
+    charIdx = 0;
+    delay = 300;
+  }
+  setTimeout(type, delay);
+}
+type();
+
+// ── particle network background ──
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+let w, h, particles = [];
+
+function resize() {
+  w = canvas.width = window.innerWidth;
+  h = canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+const PARTICLE_COUNT = 80;
+for (let i = 0; i < PARTICLE_COUNT; i++) {
+  particles.push({
+    x: Math.random() * w,
+    y: Math.random() * h,
+    vx: (Math.random() - 0.5) * 0.4,
+    vy: (Math.random() - 0.5) * 0.4,
+    r: Math.random() * 1.5 + 0.5
+  });
+}
+
+function drawParticles() {
+  ctx.clearRect(0, 0, w, h);
+
+  // update
+  for (let p of particles) {
+    p.x += p.vx;
+    p.y += p.vy;
+    if (p.x < 0) p.x = w;
+    if (p.x > w) p.x = 0;
+    if (p.y < 0) p.y = h;
+    if (p.y > h) p.y = 0;
+  }
+
+  // mouse interaction — particles gently pulled toward cursor
+  for (let p of particles) {
+    const dx = mx - p.x, dy = my - p.y;
+    const dist = Math.sqrt(dx*dx + dy*dy);
+    if (dist < 150 && dist > 0) {
+      const force = 0.003;
+      p.vx += (dx / dist) * force;
+      p.vy += (dy / dist) * force;
+    }
+    // dampen
+    p.vx *= 0.999;
+    p.vy *= 0.999;
+  }
+
+  // draw connections
+  for (let i = 0; i < particles.length; i++) {
+    for (let j = i + 1; j < particles.length; j++) {
+      const dx = particles[i].x - particles[j].x;
+      const dy = particles[i].y - particles[j].y;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+      if (dist < 120) {
+        const alpha = (1 - dist / 120) * 0.12;
+        ctx.strokeStyle = `rgba(0,212,255,${alpha})`;
+        ctx.lineWidth = 0.5;
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(particles[j].x, particles[j].y);
+        ctx.stroke();
+      }
+    }
+  }
+
+  // draw particles
+  for (let p of particles) {
+    ctx.fillStyle = 'rgba(0,212,255,0.5)';
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  requestAnimationFrame(drawParticles);
+}
+drawParticles();
+</script>
+</body>
+</html>
