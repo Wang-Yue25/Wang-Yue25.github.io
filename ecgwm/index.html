@@ -618,42 +618,38 @@
       </div>
     </div>
 
-    <!-- Part 2: Single Lead Miss — 2 rows × 3 columns with row labels -->
+    <!-- Part 2: Single Lead Miss — 2×2 + right spanning column -->
     <h3 class="title is-4 has-text-centered" style="margin-top: 50px;">Single Lead Reconstruction</h3>
     <p class="has-text-centered" style="color: #555; margin-bottom: 20px;">
       Reconstructing missing leads using our generation and refinement pipeline.
     </p>
 
     <div class="gray-box-container">
-      <div style="display: grid; grid-template-columns: 80px 1fr 1fr 1fr; gap: 15px; align-items: center;">
-        <!-- Column headers -->
-        <div></div>
-        <div class="has-text-centered"><strong>Pre-dose ECG</strong></div>
-        <div class="has-text-centered"><strong>Generated Post-dose ECG</strong></div>
-        <div class="has-text-centered"><strong>True Post-dose ECG</strong></div>
-
-        <!-- Row 1: 1 Lead Missing -->
-        <div style="display: flex; align-items: center; justify-content: center; font-weight: bold; color: #555; font-size: 0.85rem;">1 Lead<br>Missing</div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px;">
+        <!-- Row 1 Col 1: 1 Lead Missing - Pre-dose -->
         <div class="video-wrapper">
+          <h4>1 Lead Missing &mdash; Pre-dose ECG</h4>
           <img src="assets/leads/miss1/pre-dose.png" style="width: 100%; border-radius: 8px; border: 1px solid #ddd;">
         </div>
+        <!-- Row 1 Col 2: 1 Lead Missing - Generated -->
         <div class="video-wrapper">
+          <h4>1 Lead Missing &mdash; Generated Post-dose</h4>
           <img src="assets/leads/miss1/generation.png" style="width: 100%; border-radius: 8px; border: 1px solid #ddd;">
         </div>
-        <div class="video-wrapper">
+        <!-- Row 1-2 Col 3: True Post-dose ECG (spans both rows) -->
+        <div class="video-wrapper" style="grid-row: 1 / 3; display: flex; flex-direction: column; justify-content: center;">
+          <h4>True Post-dose ECG</h4>
           <img src="assets/leads/miss1/true post-dose ecg.png" style="width: 100%; border-radius: 8px; border: 1px solid #ddd;">
         </div>
-
-        <!-- Row 2: 2 Leads Missing -->
-        <div style="display: flex; align-items: center; justify-content: center; font-weight: bold; color: #555; font-size: 0.85rem;">2 Leads<br>Missing</div>
+        <!-- Row 2 Col 1: 2 Leads Missing - Pre-dose -->
         <div class="video-wrapper">
-          <img src="assets/leads/miss1/pre-dose.png" style="width: 100%; border-radius: 8px; border: 1px solid #ddd;">
-        </div>
-        <div class="video-wrapper">
-          <img src="assets/leads/miss1/generation_2.png" style="width: 100%; border-radius: 8px; border: 1px solid #ddd;">
-        </div>
-        <div class="video-wrapper">
+          <h4>2 Leads Missing &mdash; Pre-dose ECG</h4>
           <img src="assets/leads/miss1/true 2 leads miss.png" style="width: 100%; border-radius: 8px; border: 1px solid #ddd;">
+        </div>
+        <!-- Row 2 Col 2: 2 Leads Missing - Generated -->
+        <div class="video-wrapper">
+          <h4>2 Leads Missing &mdash; Generated Post-dose</h4>
+          <img src="assets/leads/miss1/generation_2.png" style="width: 100%; border-radius: 8px; border: 1px solid #ddd;">
         </div>
       </div>
     </div>
