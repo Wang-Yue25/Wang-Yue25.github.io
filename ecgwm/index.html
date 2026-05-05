@@ -347,11 +347,11 @@
 ============================================== -->
 <section class="section">
   <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">ECG-WM Pipeline</h2>
+    <h2 class="title is-3 has-text-centered">Method Overview</h2>
     <div class="content has-text-centered">
       <img src="assets/pipeline/pipeline.png" style="width: 100%; border-radius: 10px;">
       <p class="is-size-7" style="color: #555; margin-top: 8px;">
-        Given a pre-dose ECG, a Vision-Language-Action module proposes candidate drug interventions. An ODE-enhanced latent diffusion world model then simulates the corresponding post-dose ECG trajectories. A frozen ECG foundation model evaluates the simulated waveforms to estimate downstream clinical risk, enabling comparative assessment of candidate treatments.
+        Our generation paradigm integrates drug-conditioned simulation with uncertainty-aware risk evaluation. <strong>Top:</strong> Unlike the traditional prediction paradigm—which maps static patient data to a risk score without counterfactual reasoning—our method generates post-dose ECGs via a cardiac-ODE-enhanced world model, enabling actionable drug recommendations. <strong>Middle:</strong> From a pre-dose ECG, the model simulates drug-specific post-dose trajectories, evaluates them through an uncertainty-aware risk predictor, and ranks candidate interventions. <strong>Bottom:</strong> Single-step and multi-step rollout experiments show our model achieves the closest alignment with oracle ground truth compared to GPT baselines.
       </p>
     </div>
   </div>
@@ -363,11 +363,11 @@
 ============================================== -->
 <section class="section">
   <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">Method Overview</h2>
+    <h2 class="title is-3 has-text-centered">Model Architecture</h2>
     <div class="content has-text-centered">
       <img src="assets/pipeline/first_figure.png" style="width: 100%; border-radius: 10px;">
       <p class="is-size-7" style="color: #555; margin-top: 8px;">
-        <strong>Left:</strong> Prior methods rely on open-loop signal reconstruction (generative models) or static risk prediction (predictive models), limiting their utility for intervention-aware analysis. Our ECG World Model integrates candidate drug actions, simulates action-conditioned cardiac dynamics, and evaluates downstream risk under uncertainty. <strong>Right:</strong> Our method achieves superior long-horizon predictive stability in multi-step rollouts compared to GPT-based baselines.
+        Given a pre-dose ECG and a clinical query, an ECG Foundation Model extracts domain-informed features. The ODE-enhanced World Model then simulates latent cardiac dynamics forward in time via an ODE solver, producing a predicted post-dose state. A VAE decoder reconstructs the post-dose ECG waveform, while an inverse dynamics module and Action Projection head infer the drug action underlying the transition. The generated Post-dose ECG is fed into a frozen risk predictor, with a Vision-Language Model providing the final drug recommendation.
       </p>
     </div>
   </div>
