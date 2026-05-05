@@ -425,13 +425,43 @@
       </p>
     </div>
 
-    <!-- Table 2: Physiological Simulation Fidelity -->
-    <div class="content has-text-centered" style="margin-top: 40px;">
-      <h3 class="title is-5 has-text-centered">Table 2: Physiological Simulation Fidelity (Intervals)</h3>
-      <img src="assets/training/table2_fidelity.png" style="width: 100%; border-radius: 10px; border: 1px solid #ddd;">
+    <!-- Table 2: Performance comparison on three ECG intervals -->
+    <div class="content" style="margin-top: 40px; overflow-x: auto;">
+      <h3 class="title is-5 has-text-centered">Table 2: Performance comparison of different methods on three ECG intervals.</h3>
+      <table class="table is-bordered is-striped is-hoverable is-fullwidth" style="font-size: 0.78rem; text-align: center;">
+        <thead>
+          <tr>
+            <th rowspan="2" style="text-align: center; background: #f0f4f9; vertical-align: middle;">Methods</th>
+            <th colspan="2" style="background: #f0f4f9;">QTc Interval</th>
+            <th colspan="2" style="background: #f0f4f9;">PR Interval</th>
+            <th colspan="2" style="background: #f0f4f9;">T<sub>peak</sub>&minus;T<sub>end</sub> Interval</th>
+          </tr>
+          <tr>
+            <th>Acc (%) &uarr;</th><th>Rec (%) &uarr;</th>
+            <th>Acc (%) &uarr;</th><th>Rec (%) &uarr;</th>
+            <th>Acc (%) &uarr;</th><th>Rec (%) &uarr;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>WGAN</td><td>75.23&plusmn;0.69</td><td>77.23&plusmn;0.71</td><td>57.67&plusmn;0.64</td><td>58.04&plusmn;0.54</td><td>85.49&plusmn;0.12</td><td>87.35&plusmn;0.16</td></tr>
+          <tr><td>StyleGAN</td><td>72.71&plusmn;1.06</td><td>74.29&plusmn;1.49</td><td>52.15&plusmn;3.54</td><td>55.35&plusmn;1.20</td><td>88.71&plusmn;1.96</td><td>90.35&plusmn;1.87</td></tr>
+          <tr><td>ECG ODE-GAN</td><td>72.81&plusmn;3.24</td><td>73.95&plusmn;2.25</td><td>54.63&plusmn;1.49</td><td>56.16&plusmn;1.39</td><td>87.03&plusmn;0.52</td><td>88.19&plusmn;0.79</td></tr>
+          <tr><td>TTS-CGAN</td><td>86.43&plusmn;1.65</td><td>87.21&plusmn;0.64</td><td>70.09&plusmn;2.08</td><td>72.82&plusmn;2.34</td><td>83.43&plusmn;1.85</td><td>85.48&plusmn;1.57</td></tr>
+          <tr><td>CECG-GAN</td><td>79.92&plusmn;1.27</td><td>82.75&plusmn;1.31</td><td>61.08&plusmn;1.43</td><td>60.62&plusmn;0.71</td><td>89.29&plusmn;0.13</td><td>91.26&plusmn;0.05</td></tr>
+          <tr><td>DiffuSETS</td><td>86.81&plusmn;0.98</td><td>90.07&plusmn;1.24</td><td>72.62&plusmn;1.34</td><td>74.20&plusmn;1.54</td><td>89.84&plusmn;0.98</td><td>92.10&plusmn;0.96</td></tr>
+          <tr><td>DADM</td><td>89.46&plusmn;1.36</td><td>93.69&plusmn;1.49</td><td>68.02&plusmn;1.14</td><td>72.26&plusmn;1.72</td><td>91.63&plusmn;0.76</td><td>93.04&plusmn;0.58</td></tr>
+          <tr style="background: #f0f8ff; font-weight: bold;">
+            <td><strong>Ours</strong></td>
+            <td><strong>90.55&plusmn;0.76</strong></td><td><strong>96.26&plusmn;0.82</strong></td>
+            <td><strong>76.04&plusmn;0.97</strong></td><td><strong>80.84&plusmn;1.24</strong></td>
+            <td><strong>94.70&plusmn;1.13</strong></td><td><strong>95.06&plusmn;0.49</strong></td>
+          </tr>
+        </tbody>
+      </table>
       <p class="is-size-7" style="color: #555; margin-top: 6px;">
-        Comparison of simulation fidelity across drug intervention intervals (QTc, PR, and T<sub>peak</sub>&minus;T<sub>end</sub>).
-        Our method consistently achieves higher accuracy and recall than competing approaches.
+        * A prediction is correct only if all indicator labels match the ground truth.
+        Our method more accurately preserves physiologically consistent signal characteristics
+        compared to all baselines, particularly under drug-induced variations.
       </p>
     </div>
   </div>
