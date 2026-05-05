@@ -386,12 +386,6 @@
   <div class="container is-max-desktop">
     <h2 class="title is-3 has-text-centered">Experimental Results</h2>
 
-    <!-- Rollout Figure -->
-    <div class="content has-text-centered" style="margin-top: 30px;">
-      <p>Long-horizon predictive stability in multi-step rollouts:</p>
-      <img src="assets/training/rollout.png" style="width: 100%; border-radius: 10px;">
-    </div>
-
     <!-- Table 1: Latent and Signal ECG Prediction -->
     <div class="content" style="margin-top: 40px; overflow-x: auto;">
       <h3 class="title is-5 has-text-centered">Table 1: Post-dose ECG Prediction Error</h3>
@@ -667,14 +661,25 @@
   <div class="container is-max-desktop">
     <h2 class="title is-3 has-text-centered">Ablation Studies</h2>
 
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 20px;">
-      <div class="content has-text-centered">
-        <h3 class="title is-5">EPK Loss Ablation</h3>
-        <img src="assets/training/ablation_epk.png" style="width: 100%; border-radius: 10px; border: 1px solid #ddd;">
-        <p class="is-size-7" style="color: #555; margin-top: 6px;">
-          Effect of the External Physiological Knowledge (EPK) regularization loss.
-        </p>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 20px; align-items: start;">
+      <!-- Left column: two stacked figures -->
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        <div class="content has-text-centered" style="margin: 0;">
+          <h3 class="title is-5">EPK Loss Ablation</h3>
+          <img src="assets/training/ablation_f2.png" style="width: 100%; border-radius: 10px; border: 1px solid #ddd;">
+          <p class="is-size-7" style="color: #555; margin-top: 4px;">
+            Effect of the External Physiological Knowledge (EPK) regularization loss.
+          </p>
+        </div>
+        <div class="content has-text-centered" style="margin: 0;">
+          <h3 class="title is-5">Multi-step Rollout Stability</h3>
+          <img src="assets/training/rollout_cropped.png" style="width: 100%; border-radius: 10px; border: 1px solid #ddd;">
+          <p class="is-size-7" style="color: #555; margin-top: 4px;">
+            Long-horizon predictive stability across multi-step rollouts.
+          </p>
+        </div>
       </div>
+      <!-- Right column -->
       <div class="content has-text-centered">
         <h3 class="title is-5">Risk-Aversion Coefficient &lambda;</h3>
         <img src="assets/training/ablation_lambda.png" style="width: 100%; border-radius: 10px; border: 1px solid #ddd;">
