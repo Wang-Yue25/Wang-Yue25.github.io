@@ -351,10 +351,7 @@
     <div class="content has-text-centered">
       <img src="assets/pipeline/pipeline.png" style="width: 100%; border-radius: 10px;">
       <p class="is-size-7" style="color: #555; margin-top: 8px;">
-        Overview of our inverse-dynamics pipeline for treatment evaluation and analysis.
-        Given pre-dose ECG signals, a VLA module proposes candidate drug actions, which
-        are evaluated via an ODE-enhanced world model for post-dose ECG simulation and
-        downstream risk prediction.
+        Given a pre-dose ECG, a Vision-Language-Action module proposes candidate drug interventions. An ODE-enhanced latent diffusion world model then simulates the corresponding post-dose ECG trajectories. A frozen ECG foundation model evaluates the simulated waveforms to estimate downstream clinical risk, enabling comparative assessment of candidate treatments.
       </p>
     </div>
   </div>
@@ -366,13 +363,11 @@
 ============================================== -->
 <section class="section">
   <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">Method Comparison</h2>
+    <h2 class="title is-3 has-text-centered">Method Overview</h2>
     <div class="content has-text-centered">
       <img src="assets/pipeline/first_figure.png" style="width: 100%; border-radius: 10px;">
       <p class="is-size-7" style="color: #555; margin-top: 8px;">
-        <strong>Left:</strong> Unlike prior open-loop or static models, our world model simulates
-        post-intervention ECGs to recommend optimal treatments.
-        <strong>Right:</strong> Our approach significantly outperforms GPT baselines in rollout predictions.
+        <strong>Left:</strong> Prior methods rely on open-loop signal reconstruction (generative models) or static risk prediction (predictive models), limiting their utility for intervention-aware analysis. Our ECG World Model integrates candidate drug actions, simulates action-conditioned cardiac dynamics, and evaluates downstream risk under uncertainty. <strong>Right:</strong> Our method achieves superior long-horizon predictive stability in multi-step rollouts compared to GPT-based baselines.
       </p>
     </div>
   </div>
@@ -414,8 +409,7 @@
         </tbody>
       </table>
       <p class="is-size-7" style="color: #555; margin-top: 6px;">
-        * Comparison of methods on latent and signal Post-dose ECG prediction (MIMIC-IV-ECG benchmark).
-        Lower values are better.
+        * Post-dose ECG prediction error on the MIMIC-IV-ECG benchmark. Lower MSE/MAE indicates more accurate simulation of drug-induced ECG changes across both latent and waveform spaces.
       </p>
     </div>
 
@@ -453,9 +447,7 @@
         </tbody>
       </table>
       <p class="is-size-7" style="color: #555; margin-top: 6px;">
-        * A prediction is correct only if all indicator labels match the ground truth.
-        Our method more accurately preserves physiologically consistent signal characteristics
-        compared to all baselines, particularly under drug-induced variations.
+        * Evaluation on the ECGRDVQ and ECGDMMLD drug-response databases. A prediction is considered correct only when all three interval labels (QTc, PR, T<sub>peak</sub>&minus;T<sub>end</sub>) simultaneously match the ground truth. Our method consistently outperforms baselines, demonstrating that the physiology-informed prior effectively constrains the generative process toward clinically plausible waveforms.
       </p>
     </div>
   </div>
@@ -467,14 +459,13 @@
 ============================================== -->
 <section class="section">
   <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">Baseline Comparison</h2>
+    <h2 class="title is-3 has-text-centered">Generalization and Risk Modeling</h2>
 
     <div class="content has-text-centered" style="margin-top: 20px;">
       <h3 class="title is-5">Out-of-Distribution Generalization</h3>
       <img src="assets/compare/compare.png" style="width: 80%; border-radius: 10px;">
       <p class="is-size-7" style="color: #555; margin-top: 8px;">
-        OOD comparison across different methods (DiffuSETS, DADM, and Ours).
-        Training on Drug-Response ECG dataset, testing on unseen comorbidities and disease conditions.
+        Cross-dataset generalization. Models trained on the controlled drug-response ECG datasets (ECGRDVQ, ECGDMMLD) are evaluated on unseen MIMIC-IV ICU patients administered Verapamil, testing robustness to comorbidity-induced distribution shifts.
       </p>
     </div>
 
@@ -498,9 +489,7 @@
         </tbody>
       </table>
       <p class="is-size-7" style="color: #555; margin-top: 6px;">
-        * Drug candidates from MIMIC-IV-ECG cohort: Propofol, Regular Insulin, Heparin Sodium (prophylaxis),
-        Furosemide, Norepinephrine. Evaluated on 200 test samples.
-        Higher Sign Agreement reflects more consistent prediction of risk direction.
+        * Evaluation on 200 test samples from the MIMIC-IV-ECG cohort across five drug candidates: Propofol, Regular Insulin, Heparin Sodium, Furosemide, and Norepinephrine. &Delta;Risk Sign Agreement measures the consistency of predicted risk-change direction against clinical ground truth, reflecting alignment with expert-informed treatment preferences.
       </p>
     </div>
 
@@ -513,10 +502,10 @@
 ============================================== -->
 <section class="section">
   <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">Drug-Specific Simulation Results</h2>
+    <h2 class="title is-3 has-text-centered">Drug Response Simulation</h2>
     <p class="has-text-centered" style="color: #555;">
-      Post-dose ECG simulation under different pharmacological interventions.
-      Click or use arrows to navigate.
+      Comparing pre-dose and simulated post-dose ECG waveforms.
+      Use the arrows or click thumbnails below to navigate.
     </p>
 
     <div class="gray-box-container">
@@ -540,7 +529,7 @@
         </div>
         <div class="vertical-item" data-id="1" onclick="switchDrugResult(1)">
           <img src="assets/complex/complex1/postdose_ecg.png" alt="Post-dose">
-          <div class="vertical-caption">Post-dose (General)</div>
+          <div class="vertical-caption">Post-dose (Simulated)</div>
         </div>
       </div>
     </div>
@@ -553,7 +542,7 @@
 ============================================== -->
 <section class="section">
   <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">Per-Drug Simulation Analysis</h2>
+    <h2 class="title is-3 has-text-centered">Cross-Drug Physiological Fidelity</h2>
 
     <div class="gray-box-container">
       <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;">
@@ -571,8 +560,7 @@
         </div>
       </div>
       <p class="is-size-7 has-text-centered" style="color: #555; margin-top: 15px;">
-        Simulated post-intervention ECG trajectories across three drug conditions
-        (Dofetilide, Ranolazine, Verapamil) from the ECGRDVQ and ECGDMMLD databases.
+        Simulated post-dose ECG waveforms under three pharmacologically distinct interventions from the ECGRDVQ and ECGDMMLD databases. Dofetilide (IKr blocker), Ranolazine (late INa blocker), and Verapamil (L-type calcium channel blocker) each induce characteristic ECG morphological changes that our model faithfully reproduces.
       </p>
     </div>
   </div>
@@ -584,12 +572,12 @@
 ============================================== -->
 <section class="section">
   <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">Robustness Under Missing Leads</h2>
+    <h2 class="title is-3 has-text-centered">Robustness to Missing ECG Leads</h2>
 
     <!-- Part 1: Abnormal Lead Miss — 3 columns, middle split into two rows -->
     <h3 class="title is-4 has-text-centered" style="margin-top: 30px;">Abnormal Lead Recovery</h3>
     <p class="has-text-centered" style="color: #555; margin-bottom: 20px;">
-      Comparison of post-dose ECG reconstruction when abnormal leads are missing.
+      Post-dose ECG reconstruction when one or more leads exhibit abnormal or flat waveforms. Our model recovers physiologically consistent 12-lead signals, outperforming DADM in preserving clinically meaningful morphology.
     </p>
 
     <div class="gray-box-container">
@@ -621,7 +609,7 @@
     <!-- Part 2: Single Lead Miss — 2×2 + right spanning column -->
     <h3 class="title is-4 has-text-centered" style="margin-top: 50px;">Single Lead Reconstruction</h3>
     <p class="has-text-centered" style="color: #555; margin-bottom: 20px;">
-      Reconstructing missing leads using our generation and refinement pipeline.
+      Structured evaluation across varying numbers of missing leads. Each row shows a condition (1 or 2 leads missing); each column shows a processing stage: input (Pre-dose with missing leads), model output (Generated Post-dose), and ground truth (True Post-dose ECG).
     </p>
 
     <div class="gray-box-container">
@@ -671,14 +659,14 @@
           <h3 class="title is-5">EPK Loss Ablation</h3>
           <img src="assets/training/ablation_f2.png" style="width: 100%; border-radius: 10px; border: 1px solid #ddd; flex: 1; object-fit: contain;">
           <p class="is-size-7" style="color: #555; margin-top: 4px;">
-            Effect of the External Physiological Knowledge (EPK) regularization loss.
+            Ablation of the External Physiological Knowledge (EPK) loss weight. Higher EPK weighting enforces stronger physiological consistency, reducing generative hallucinations at the cost of slightly increased reconstruction error.
           </p>
         </div>
         <div class="content has-text-centered" style="margin: 0; flex: 1; display: flex; flex-direction: column;">
           <h3 class="title is-5">Multi-step Rollout Stability</h3>
           <img src="assets/training/rollout_cropped.png" style="width: 100%; border-radius: 10px; border: 1px solid #ddd; flex: 1; object-fit: contain;">
           <p class="is-size-7" style="color: #555; margin-top: 4px;">
-            Long-horizon predictive stability across multi-step rollouts.
+            Multi-step rollout stability. Our model maintains predictive accuracy over extended horizons, while baseline methods exhibit compounding drift in generated waveforms.
           </p>
         </div>
       </div>
@@ -687,7 +675,7 @@
         <h3 class="title is-5">Risk-Aversion Coefficient &lambda;</h3>
         <img src="assets/training/ablation_lambda.png" style="width: 100%; border-radius: 10px; border: 1px solid #ddd; flex: 1; object-fit: contain;">
         <p class="is-size-7" style="color: #555; margin-top: 6px;">
-          Impact of the risk-aversion hyperparameter &lambda; on the mean-variance objective.
+          Effect of the risk-aversion coefficient &lambda; in the uncertainty-aware scoring function S(a) = &mu;<sub>R</sub>(a) + &lambda;&middot;&sigma;<sub>R</sub>(a). Larger &lambda; penalizes high-variance drug candidates, enabling clinicians to trade off expected risk against uncertainty.
         </p>
       </div>
     </div>
@@ -705,13 +693,7 @@
     <div class="content">
       <p>If you use this work or find it helpful, please consider citing:</p>
       <div class="citation-box">
-@inproceedings{ecg-wm2026,
-  title={{ECG-WM: Empowering Clinical Intervention with
-         Closed-Loop Electrocardiography World Models}},
-  author={Anonymous},
-  booktitle={Advances in Neural Information Processing Systems},
-  year={2026},
-}</div>
+...</div>
     </div>
   </div>
 </section>
