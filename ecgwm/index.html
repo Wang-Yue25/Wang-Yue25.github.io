@@ -664,28 +664,28 @@
   <div class="container is-max-desktop">
     <h2 class="title is-3 has-text-centered">Ablation Studies</h2>
 
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 20px; align-items: start;">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 20px; align-items: stretch;">
       <!-- Left column: two stacked figures -->
       <div style="display: flex; flex-direction: column; gap: 20px;">
-        <div class="content has-text-centered" style="margin: 0;">
+        <div class="content has-text-centered" style="margin: 0; flex: 1; display: flex; flex-direction: column;">
           <h3 class="title is-5">EPK Loss Ablation</h3>
-          <img src="assets/training/ablation_f2.png" style="width: 100%; border-radius: 10px; border: 1px solid #ddd;">
+          <img src="assets/training/ablation_f2.png" style="width: 100%; border-radius: 10px; border: 1px solid #ddd; flex: 1; object-fit: contain;">
           <p class="is-size-7" style="color: #555; margin-top: 4px;">
             Effect of the External Physiological Knowledge (EPK) regularization loss.
           </p>
         </div>
-        <div class="content has-text-centered" style="margin: 0;">
+        <div class="content has-text-centered" style="margin: 0; flex: 1; display: flex; flex-direction: column;">
           <h3 class="title is-5">Multi-step Rollout Stability</h3>
-          <img src="assets/training/rollout_cropped.png" style="width: 100%; border-radius: 10px; border: 1px solid #ddd;">
+          <img src="assets/training/rollout_cropped.png" style="width: 100%; border-radius: 10px; border: 1px solid #ddd; flex: 1; object-fit: contain;">
           <p class="is-size-7" style="color: #555; margin-top: 4px;">
             Long-horizon predictive stability across multi-step rollouts.
           </p>
         </div>
       </div>
-      <!-- Right column -->
-      <div class="content has-text-centered">
+      <!-- Right column: single figure, stretch to match left height -->
+      <div class="content has-text-centered" style="display: flex; flex-direction: column;">
         <h3 class="title is-5">Risk-Aversion Coefficient &lambda;</h3>
-        <img src="assets/training/ablation_lambda.png" style="width: 100%; border-radius: 10px; border: 1px solid #ddd;">
+        <img src="assets/training/ablation_lambda.png" style="width: 100%; border-radius: 10px; border: 1px solid #ddd; flex: 1; object-fit: contain;">
         <p class="is-size-7" style="color: #555; margin-top: 6px;">
           Impact of the risk-aversion hyperparameter &lambda; on the mean-variance objective.
         </p>
