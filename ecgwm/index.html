@@ -2,10 +2,10 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <meta name="description" content="ECGWM: A Physiology-Informed ECG World Model for Closed-Loop Intervention-Aware Cardiac Analysis">
+  <meta name="description" content="ECG-WM: A Physiology-Informed ECG World Model for Closed-Loop Intervention-Aware Cardiac Analysis">
   <meta name="keywords" content="ECG, World Model, Diffusion, Cardiac Electrophysiology, Drug Response, Simulation">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ECGWM Project Page</title>
+  <title>ECG-WM Project Page</title>
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -268,7 +268,7 @@
       <div class="columns is-centered">
         <div class="column has-text-centered">
           <h1 class="title is-2 publication-title">
-            <span class="title-color">ECGWM</span>: Empowering Clinical Intervention with
+            <span class="title-color">ECG-WM</span>: Empowering Clinical Intervention with
             Closed-Loop Electrocardiography World Models
           </h1>
           <h2 class="subtitle is-3 publication-subtitle subtitle-small">
@@ -318,18 +318,19 @@
             yet they remain limited in modeling how cardiac dynamics evolve under external interventions.
             In particular, existing approaches focus primarily on static prediction and lack mechanisms
             to capture ECG variations under different pharmacological conditions. In this work, we propose
-            an <strong>ECG World Model (ECGWM)</strong> for action-conditioned predictive simulation of cardiac
-            electrophysiology. Rather than simply pipelining disjoint modules, our framework features a
-            principled integration of physiological ODE priors into latent diffusion dynamics via energy
-            regularization. This structural constraint enables the synthesis of physiologically plausible
-            post-intervention ECG trajectories while effectively mitigating generative hallucinations.
-            Building on this simulation framework, we introduce an uncertainty-aware evaluation strategy
-            that leverages the stochasticity of diffusion sampling to characterize both the expected clinical
-            risk and its variability, enabling more reliable comparative assessment of candidate interventions.
-            We evaluate our method across diverse settings, including controlled drug-response scenarios
-            and real-world clinical records. Beyond standard waveform metrics, experimental results
-            demonstrate improved risk calibration and strong alignment with expert-informed treatment
-            preferences.
+            an <strong>ECG World Model</strong> for action-conditioned predictive simulation of cardiac
+            electrophysiology. Moving beyond disjoint pipelines, our framework features a
+            principled integration of physiological ordinary differential equation (ODE) priors into latent
+            diffusion dynamics via energy regularization. This structural constraint enables the synthesis
+            of physiologically plausible post-intervention ECG trajectories while effectively mitigating
+            generative hallucinations. Building on this simulation process, we introduce an uncertainty-aware
+            evaluation strategy that leverages the stochasticity of diffusion sampling to characterize both
+            the expected clinical risk and its variability, allowing a more reliable comparative assessment
+            of candidate interventions. We evaluate our method across diverse settings, including controlled
+            drug-response scenarios and real-world clinical records. Beyond standard waveform metrics,
+            experimental results demonstrate improved risk calibration and strong alignment with
+            expert-informed treatment preferences. These results establish our approach as a robust foundation
+            for safe and intervention-aware clinical decision support.
           </p>
         </div>
       </div>
@@ -346,7 +347,7 @@
 ============================================== -->
 <section class="section">
   <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">ECGWM Pipeline</h2>
+    <h2 class="title is-3 has-text-centered">ECG-WM Pipeline</h2>
     <div class="content has-text-centered">
       <img src="assets/pipeline/pipeline.png" style="width: 100%; border-radius: 10px;">
       <p class="is-size-7" style="color: #555; margin-top: 8px;">
@@ -698,8 +699,8 @@
     <div class="content">
       <p>If you use this work or find it helpful, please consider citing:</p>
       <div class="citation-box">
-@inproceedings{ecgwm2026,
-  title={{ECGWM: Empowering Clinical Intervention with
+@inproceedings{ecg-wm2026,
+  title={{ECG-WM: Empowering Clinical Intervention with
          Closed-Loop Electrocardiography World Models}},
   author={Anonymous},
   booktitle={Advances in Neural Information Processing Systems},
