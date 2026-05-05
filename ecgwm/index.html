@@ -685,6 +685,79 @@
 
 
 <!-- =============================================
+     Section: Limitations and Impact
+============================================== -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Limitations and Impact</h2>
+
+    <div class="gray-box-container">
+      <div class="content">
+
+        <h3 class="title is-5">Impact</h3>
+        <p>
+          This work proposes an ECG World Model for simulation-based analysis of cardiac
+          interventions, enabling AI systems to explore potential physiological responses
+          under different treatment scenarios. By combining a physiological prior with
+          data-driven generative modeling, the framework supports hypothesis generation
+          and <em>in-silico</em> evaluation of treatment effects.
+        </p>
+
+        <h3 class="title is-5" style="margin-top: 30px;">Limitations</h3>
+        <ol style="padding-left: 20px; line-height: 1.8;">
+          <li>
+            <strong>Data Coverage.</strong> The model is trained on observational and
+            simulated data, which may not fully capture real-world complexity, variability,
+            or rare edge cases. This can lead to deviations from true clinical outcomes
+            under distributional shifts.
+          </li>
+          <li>
+            <strong>Simplified Prior.</strong> The physiological prior is simplified and
+            may be misspecified, limiting its ability to represent full cardiac dynamics,
+            especially in pathological regimes.
+          </li>
+          <li>
+            <strong>Evaluation Scope.</strong> Evaluation focuses on aggregate stability
+            metrics rather than clinical endpoints, and does not fully explain the interaction
+            between prior-driven and data-driven components.
+          </li>
+          <li>
+            <strong>Safety Guarantees.</strong> The model lacks calibrated uncertainty
+            estimates and formal safety guarantees, constraining its use in high-stakes settings.
+          </li>
+        </ol>
+
+        <div class="notification is-warning is-light" style="margin-top: 25px; border-radius: 10px;">
+          <p style="margin: 0;">
+            <strong>Important.</strong> This system is <strong>not</strong> intended as a
+            standalone clinical tool. It should be used only as a decision-support framework
+            requiring expert validation. Generated scenarios should be treated as exploratory
+            hypotheses rather than definitive predictions.
+          </p>
+        </div>
+
+        <p style="margin-top: 25px;">
+          Despite these limitations, the model exhibits stable and bounded behavior across
+          varying levels of prior mismatch, with variability increasing smoothly rather than
+          collapsing. The influence of the prior is also continuous and controllable, as
+          partial prior injection yields intermediate performance. These results suggest a
+          degree of robustness under imperfect assumptions.
+        </p>
+
+        <p>
+          Overall, this work takes a step toward more robust and interpretable generative
+          models for physiological simulation, while underscoring the need for further
+          validation, mechanistic understanding, and safety-aware design prior to real-world
+          deployment.
+        </p>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =============================================
      Section: Citation
 ============================================== -->
 <section class="section">
