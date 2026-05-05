@@ -585,70 +585,63 @@
 <section class="section">
   <div class="container is-max-desktop">
     <h2 class="title is-3 has-text-centered">Robustness Under Missing Leads</h2>
-    <p class="has-text-centered" style="color: #555;">
-      Our model maintains physiological consistency even when individual ECG leads are missing.
-      Click to view each lead pair (original vs. missing).
+
+    <!-- Part 1: Abnormal Lead Miss -->
+    <h3 class="title is-4 has-text-centered" style="margin-top: 30px;">Abnormal Lead Recovery</h3>
+    <p class="has-text-centered" style="color: #555; margin-bottom: 20px;">
+      Comparison of post-dose ECG reconstruction when abnormal leads are missing.
     </p>
 
     <div class="gray-box-container">
-      <!-- Top: two images side by side (original vs missing) -->
-      <div class="video-slider-container" style="margin-bottom: 20px;">
-        <div class="video-grid-2" style="flex: 1; gap: 40px; max-width: 80%;">
-          <div class="video-wrapper">
-            <h4>Original Lead</h4>
-            <img id="miss-lead-original" src="assets/simple/miss_leads/lead1.png"
-                 style="width: 100%; border-radius: 8px; border: 1px solid #ddd;">
-          </div>
-          <div class="video-wrapper">
-            <h4>Missing Lead (Reconstructed)</h4>
-            <img id="miss-lead-reconstructed" src="assets/simple/miss_leads/lead1_miss.png"
-                 style="width: 100%; border-radius: 8px; border: 1px solid #ddd;">
-          </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 12px;">
+        <div class="video-wrapper">
+          <h4>Pre-dose</h4>
+          <img src="assets/leads/abnormal/pre-dose.png" style="width: 100%; border-radius: 8px; border: 1px solid #ddd;">
+        </div>
+        <div class="video-wrapper">
+          <h4>True Post-dose</h4>
+          <img src="assets/leads/abnormal/true_postdose.png" style="width: 100%; border-radius: 8px; border: 1px solid #ddd;">
+        </div>
+        <div class="video-wrapper">
+          <h4>Post-dose (DADM)</h4>
+          <img src="assets/leads/abnormal/post-dose_dadm.png" style="width: 100%; border-radius: 8px; border: 1px solid #ddd;">
+        </div>
+        <div class="video-wrapper">
+          <h4>Post-dose (Ours)</h4>
+          <img src="assets/leads/abnormal/post-dose_ours.png" style="width: 100%; border-radius: 8px; border: 1px solid #ddd;">
         </div>
       </div>
+    </div>
 
-      <!-- Bottom: lead selector grid, 8 per row -->
-      <div class="simple-grid-menu" id="miss-lead-menu" style="grid-template-columns: repeat(8, 1fr); width: 95%;">
-        <div class="vertical-item active" data-id="lead1" onclick="switchMissLead('lead1', this)">
-          <div class="vertical-caption">Lead I</div>
-        </div>
-        <div class="vertical-item" data-id="lead2" onclick="switchMissLead('lead2', this)">
-          <div class="vertical-caption">Lead II</div>
-        </div>
-        <div class="vertical-item" data-id="lead3" onclick="switchMissLead('lead3', this)">
-          <div class="vertical-caption">Lead III</div>
-        </div>
-        <div class="vertical-item" data-id="leadavr" onclick="switchMissLead('leadavr', this)">
-          <div class="vertical-caption">aVR</div>
-        </div>
-        <div class="vertical-item" data-id="leadavl" onclick="switchMissLead('leadavl', this)">
-          <div class="vertical-caption">aVL</div>
-        </div>
-        <div class="vertical-item" data-id="leadavf" onclick="switchMissLead('leadavf', this)">
-          <div class="vertical-caption">aVF</div>
-        </div>
-        <div class="vertical-item" data-id="leadav1" onclick="switchMissLead('leadav1', this)">
-          <div class="vertical-caption">V1</div>
-        </div>
-        <div class="vertical-item" data-id="leadav2" onclick="switchMissLead('leadav2', this)">
-          <div class="vertical-caption">V2</div>
-        </div>
-      </div>
-      <div class="simple-grid-menu" id="miss-lead-menu2" style="grid-template-columns: repeat(8, 1fr); width: 95%; margin-top: 10px;">
-        <div class="vertical-item" data-id="leadav3" onclick="switchMissLead('leadav3', this)">
-          <div class="vertical-caption">V3</div>
-        </div>
-        <div class="vertical-item" data-id="leadav4" onclick="switchMissLead('leadav4', this)">
-          <div class="vertical-caption">V4</div>
-        </div>
-        <div class="vertical-item" data-id="leadav5" onclick="switchMissLead('leadav5', this)">
-          <div class="vertical-caption">V5</div>
-        </div>
-        <div class="vertical-item" data-id="leadav6" onclick="switchMissLead('leadav6', this)">
-          <div class="vertical-caption">V6</div>
-        </div>
-      </div>
+    <!-- Part 2: Single Lead Miss -->
+    <h3 class="title is-4 has-text-centered" style="margin-top: 50px;">Single Lead Reconstruction</h3>
+    <p class="has-text-centered" style="color: #555; margin-bottom: 20px;">
+      Reconstructing missing leads using our generation and refinement pipeline.
+    </p>
 
+    <div class="gray-box-container">
+      <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;">
+        <div class="video-wrapper">
+          <h4>Pre-dose</h4>
+          <img src="assets/leads/miss1/pre-dose.png" style="width: 100%; border-radius: 8px; border: 1px solid #ddd;">
+        </div>
+        <div class="video-wrapper">
+          <h4>True Post-dose</h4>
+          <img src="assets/leads/miss1/true post-dose ecg.png" style="width: 100%; border-radius: 8px; border: 1px solid #ddd;">
+        </div>
+        <div class="video-wrapper">
+          <h4>2 Leads Missing</h4>
+          <img src="assets/leads/miss1/true 2 leads miss.png" style="width: 100%; border-radius: 8px; border: 1px solid #ddd;">
+        </div>
+        <div class="video-wrapper">
+          <h4>Generation</h4>
+          <img src="assets/leads/miss1/generation.png" style="width: 100%; border-radius: 8px; border: 1px solid #ddd;">
+        </div>
+        <div class="video-wrapper">
+          <h4>Generation (Refined)</h4>
+          <img src="assets/leads/miss1/generation_2.png" style="width: 100%; border-radius: 8px; border: 1px solid #ddd;">
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -748,23 +741,6 @@
     let newId = currentDrugId + 1;
     if (newId >= totalDrugResults) newId = 0;
     switchDrugResult(newId);
-  }
-
-  // ---- Missing Lead Data ----
-  const missLeads = [
-    'lead1', 'lead2', 'lead3', 'leadavr', 'leadavl', 'leadavf',
-    'leadav1', 'leadav2', 'leadav3', 'leadav4', 'leadav5', 'leadav6'
-  ];
-
-  function switchMissLead(leadId, el) {
-    const origImg = document.getElementById('miss-lead-original');
-    const reconImg = document.getElementById('miss-lead-reconstructed');
-    origImg.src = `assets/simple/miss_leads/${leadId}.png`;
-    reconImg.src = `assets/simple/miss_leads/${leadId}_miss.png`;
-
-    document.querySelectorAll('#miss-lead-menu .vertical-item, #miss-lead-menu2 .vertical-item')
-      .forEach(item => item.classList.remove('active'));
-    if (el) el.classList.add('active');
   }
 
 </script>
